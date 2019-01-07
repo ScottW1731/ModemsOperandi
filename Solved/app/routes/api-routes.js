@@ -9,9 +9,9 @@ var connection = require("../config/connection.js");
 // Routes
 // =============================================================
 module.exports = function(app) {
-  // Get all chirps
+  // Get all builds
   app.get("/api/all", function(req, res) {
-    var dbQuery = "SELECT * FROM chirps";
+    var dbQuery = "SELECT * FROM builds";
 
     connection.query(dbQuery, function(err, result) {
       if (err) throw err;
@@ -19,16 +19,16 @@ module.exports = function(app) {
     });
   });
 
-  // Add a chirp
+  // Add a build
   app.post("/api/new", function(req, res) {
-    console.log("Chirp Data:");
+    console.log("build Data:");
     console.log(req.body);
 
-    var dbQuery = "INSERT INTO chirps (author, body, created_at) VALUES (?,?,?)";
+    var dbQuery = "INSERT INTO builds (author, body, created_at) VALUES (?,?,?)";
 
     connection.query(dbQuery, [req.body.author, req.body.body, req.body.created_at], function(err, result) {
       if (err) throw err;
-      console.log("Chirp Successfully Saved!");
+      console.log("build Successfully Saved!");
       res.end();
     });
   });

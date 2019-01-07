@@ -5,13 +5,13 @@
 }
 
 .cool-font {
-  font-family: Shrikhand, cursive;
+  font-family: Roboto, sans-serif;
   font-size: 24px;
   color: #1da1f2;
 }
 
 .jumbotron {
-  font-family: Shrikhand, cursive;
+  font-family: Roboto, sans-serif;
   color: white;
   background-color: #1da1f2;
 }
@@ -23,7 +23,7 @@ textarea {
 
 .btn {
   margin: 10px;
-  font-family: 'Roboto', sans-serif;
+  font-family: Roboto, sans-serif;
   color: #1da1f2;
   background-color: white;
   border-color: #1da1f2;

@@ -1,5 +1,5 @@
 {
-  "name": "ModemsOperandi",
+  "name": "modemsoperandi",
   "version": "1.0.0",
   "description": "Automatic PC Builder",
   "main": "server.js",
@@ -11,5 +11,14 @@
   "dependencies": {
     "express": "^4.16.4",
     "mysql": "^2.16.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ScottW1731/ModemsOperandi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ScottW1731/ModemsOperandi/issues"
+  },
+  "homepage": "https://github.com/ScottW1731/ModemsOperandi#readme"
 }

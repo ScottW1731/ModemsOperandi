@@ -1,12 +1,12 @@
 {
-  "name": "express-library",
+  "name": "ModemsOperandi",
   "version": "1.0.0",
-  "description": "Simple library app built with express.",
+  "description": "Automatic PC Builder",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "ScottW, Daniel Reynolds, Byron Roberts, Michael Preston",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",

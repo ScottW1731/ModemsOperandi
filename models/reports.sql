@@ -1,5 +1,3 @@
-use pc_builder;
-
 ## Full build report
 select c.name as customerName, b.id as buildId, b.name, sum(cost) as total, customerId 
 	from parts p 

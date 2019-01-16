@@ -1,5 +1,3 @@
-use pc_builder;
-
 ## Seed Data                
 insert into customers (id, name) values (1138, "mike");
 insert into builds (id, customerId, name) values (12345, 1138, "super-special-awesum build");

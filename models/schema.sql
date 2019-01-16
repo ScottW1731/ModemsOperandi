@@ -1,7 +1,3 @@
-create DATABASE if not EXISTS pc_builder;
-
-use pc_builder;
-
 drop table if exists builds;
 drop table if exists parts;
 drop table if exists customers;

@@ -2,14 +2,14 @@
     "development": {
         "username": "root",
         "password": null,
-        "database": "build",
+        "database": "pc_builder",
         "host": "localhost",
         "dialect": "mysql"
     },
     "test": {
         "username": "root",
         "password": null,
-        "database": "build_test",
+        "database": "builds_test",
         "host": "localhost",
         "dialect": "mysql",
         "logging": false

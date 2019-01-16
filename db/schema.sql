@@ -1,6 +1,7 @@
 drop table if exists builds;
 drop table if exists parts;
 drop table if exists customers;
+drop table if exists build_parts_xref;
 
 create table builds
 (
@@ -14,8 +15,7 @@ create table parts
 (
 	id int not null AUTO_INCREMENT,
 	name varchar(150),
-	cost double(12, 2),
-	buildId int,
+	cost double(12, 2),	
 	primary key (id)
 );
 
@@ -24,3 +24,8 @@ create table customers(
 	name varchar(150),
 	primary key (id)
 );
+
+create table build_parts_xref(
+    partId int not null,
+    buildId int not null
+)

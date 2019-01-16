@@ -1,6 +1,8 @@
-## Full build report
-select c.name as customerName, b.id as buildId, b.name, sum(cost) as total, customerId 
-	from parts p 
-	join builds b
-	join customers c
-        on p.buildId = b.id && c.id = b.customerId;
+select c.name, b.name, p.name, p.cost
+	from customers c 
+    join builds b
+		on c.id = b.customerId
+    join build_parts_xref bps    
+		on b.id = bps.buildId
+    join parts p
+		on p.id = bps.partId

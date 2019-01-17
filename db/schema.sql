@@ -23,7 +23,7 @@ create table parts
 	primary key (id)
 );
 
-# parts <-===-> a customer's build
+/* parts <-===-> a customer's build */
 create table build_parts_xref(
     partId int not null,
     buildId int not null

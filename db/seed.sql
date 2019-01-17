@@ -1,7 +1,12 @@
-## Seed Data                
-insert into customers (id, name) values (1138, "mike");
+/*
+*   SEED DATA
+*/
+insert into customers (id, name, email) values (1138, "mike", "michael.n.preston@gmail.com");
+
+/* Builds */
 insert into builds (id, customerId, name) values (12345, 1138, "super-special-awesum build");
 
+/* Parts */
 insert into parts (name, cost) values ("Intel Core i3-8100", 118.99);
 insert into parts (name, cost) values ("Gigabyte B360M DSH3H", 74.99);
 insert into parts (name, cost) values ("MSI Radeon RX 580 GB Armor", 209.99);
@@ -14,8 +19,35 @@ insert into parts (name, cost) values ("Gigabyte - GeForce GTX 1070 Ti 8 GB Vide
 insert into parts (name, cost) values ("EVGA - DG-76 Alpine White ATX Mid Tower Case", 119.89);
 insert into parts (name, cost) values ("Corsair - RMx (2018) 750 W 80+ Gold Certified Fully-Modular ATX Power Supply", 109.99);
 
-# Simulated build
+/* Simulated build */
 insert into build_parts_xref(partId, buildId) values (3, 12345);
 insert into build_parts_xref(partId, buildId) values (4, 12345);
 insert into build_parts_xref(partId, buildId) values (6, 12345);
 insert into build_parts_xref(partId, buildId) values (10, 12345);
+
+/* Categories */
+insert into categories (name) values ('CPU');
+insert into categories (name) values ('CPU Cooler');
+insert into categories (name) values ('Memory');
+insert into categories (name) values ('Motherboard');
+insert into categories (name) values ('Storage');
+insert into categories (name) values ('Case');
+insert into categories (name) values ('Keyboard');
+insert into categories (name) values ('Mouse');
+insert into categories (name) values ('Power Supply');
+insert into categories (name) values ('Optical Drive');
+insert into categories (name) values ('Software');
+insert into categories (name) values ('Video Card');
+insert into categories (name) values ('Operating System');
+insert into categories (name) values ('Monitor');
+insert into categories (name) values ('External Storage');
+insert into categories (name) values ('Peripherals');
+insert into categories (name) values ('Accessories');
+insert into categories (name) values ('Custom');
+
+/* build types */
+insert into build_types (name) values ('Laptop');
+insert into build_types (name) values ('Gaming');
+insert into build_types (name) values ('Mac');
+insert into build_types (name) values ('Linux');
+insert into build_types (name) values ('Custom');

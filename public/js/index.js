@@ -45,11 +45,15 @@ $.get("/api/all", function(data) {
     }
 });
 
-  
   // When user builds (clicks addBtn)
-  $(".build-submit").on("click", function(event) {
+
+$(document).ready(function(){
+  $("#mb-input").click(function(){
+    $("").append($(mb-input));
     event.preventDefault();
+  });
 });
+
 //     // Make a newbuild object
 //     var newbuild = {
 //       part: $("#part").val().trim(),

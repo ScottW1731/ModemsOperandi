@@ -42,3 +42,9 @@ module.exports = function (sequelize, DataTypes) {
     });
     return Customer;
 };
+  Customer.associate = function(models) {
+      Customer.hasMany(models.Build, {
+          onDelete: "cascade"
+      });
+  };
+//  Associating Customer to many builds

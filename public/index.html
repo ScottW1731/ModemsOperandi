@@ -42,7 +42,7 @@
         </ul>
       </div>
     </nav>
-    <div class="card mt-5">
+    <div class="card mt-5 mb-5">
       <h5 class="card-header unique-color white-text text-center py-4">
         <strong>Submit a build</strong>
       </h5>
@@ -54,10 +54,13 @@
           <input type="text" id="mb-input" class="form-control mb-4" placeholder="">
           <label for="gpu-input">GPU</label>
           <input type="text" id="gpu-input" class="form-control mb-4" placeholder="">
-          <button class="btn blue-gradient btn-block my-4" type="submit">Submit</button>
+          <button class="btn blue-gradient btn-block my-4" id="submit-pc" type="submit">Submit</button>
         </form>
       </div>
+      <div id="append-here"></div>
     </div>
+    
+    <script src="./js/index.js"></script>
   </div>
 </body>
 </html>

@@ -49,7 +49,7 @@ $.get("/api/all", function(data) {
 
 $(document).ready(function(){
   $("#mb-input").click(function(){
-    $("").append($(mb-input));
+    $("").append($(mb-input).val());
     event.preventDefault();
   });
 });

@@ -6,14 +6,18 @@ module.exports = function (sequelize, DataTypes) {
             validate: {
                 len: [1]
             }
-        }, 
-        category: {
-            type:DataTypes.STRING,
+        },
+        buildType: {
+            type: DataTypes.STRING,
             allowNull: true,
+        },
+        customerId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
         }
     });
 
-    Build.associate = function(models) {
+    Build.associate = function (models) {
         Build.belongsTo(models.Customer, {
             onDelete: "cascade"
         });

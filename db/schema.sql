@@ -9,7 +9,7 @@ create table builds
 (
 	id int not null AUTO_INCREMENT,
 	customerId int not null,
-	name varchar(150),
+	name varchar(150) not null,
     buildType varchar(150), 
 	primary key (id)
 );

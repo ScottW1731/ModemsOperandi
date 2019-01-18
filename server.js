@@ -20,7 +20,6 @@ app.use(express.static("public"));
 
 // Routes
 // =============================================================
-console.log('setting up routes...')
 require("./routes/api-routes.js")(app);
 
 // Starts the server to begin listening

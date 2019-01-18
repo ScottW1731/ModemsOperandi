@@ -5,6 +5,7 @@ var bcrypt = require("bcrypt-nodejs");
 module.exports = function (sequelize, DataTypes) {
     var Customer = sequelize.define("Customer", {
         id: {
+            primaryKey: true,
             type: DataTypes.INTEGER,
             unique: true,
             allowNull: false,
@@ -40,11 +41,11 @@ module.exports = function (sequelize, DataTypes) {
     Customer.hook("beforeCreate", function (Customer) {
         Customer.password = bcrypt.hashSync(Customer.password, bcrypt.genSaltSync(10), null);
     });
+    Customer.associate = function(models) {
+        Customer.hasMany(models.Build, {
+            onDelete: "cascade"
+        });
+    };
+  //  Associating Customer to many builds
     return Customer;
 };
-  Customer.associate = function(models) {
-      Customer.hasMany(models.Build, {
-          onDelete: "cascade"
-      });
-  };
-//  Associating Customer to many builds

@@ -30,4 +30,16 @@
     event.preventDefault();
     $("#append-here").append($("#cpu-input").val());
     $("#cpu-input").val("");
+
+    $("#append-here").append($("#mb-input").val());
+    $("#mb-input").val("");
+
+    $("#append-here").append($("#gpu-input").val());
+    $("#gpu-input").val("");
+
+    $("#append-here").append($("#cooler-input").val());
+    $("#cooler-input").val("");
+
+    $("#append-here").append($("#memory-input").val());
+    $("#memory-input").val("");
   });

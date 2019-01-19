@@ -11,7 +11,6 @@ module.exports = function (app) {
     app.get("/api/builds/all", function (req, res) {
         db.Build.findAll({
             include: [db.Customer], //unsecure as it exposes the 'id'
-            raw: true
         }).then(function (build) {
             res.json(build);
         })

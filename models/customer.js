@@ -17,20 +17,22 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        // The email cannot be null, and must be a proper email before creation
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-            validate: {
-                isEmail: true
-            }
-        },
-        // The password cannot be null
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false
-        }
+        // // The email cannot be null, and must be a proper email before creation
+        // email: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false,
+        //     unique: true,
+        //     validate: {
+        //         isEmail: true
+        //     }
+        // },
+        // // The password cannot be null
+        // password: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false
+        // }
+    }, {
+        timestamps: false
     });
     // Creating a custom method for our Customer model. This will check if an unhashed password entered by the Customer can be compared to the hashed password stored in our database
     Customer.prototype.validPassword = function (password) {
@@ -41,11 +43,11 @@ module.exports = function (sequelize, DataTypes) {
     Customer.hook("beforeCreate", function (Customer) {
         Customer.password = bcrypt.hashSync(Customer.password, bcrypt.genSaltSync(10), null);
     });
-    Customer.associate = function(models) {
+    Customer.associate = function (models) {
         Customer.hasMany(models.Build, {
             onDelete: "cascade"
         });
     };
-  //  Associating Customer to many builds
+    //  Associating Customer to many builds
     return Customer;
 };

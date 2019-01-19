@@ -15,7 +15,7 @@
         "logging": false
     },
     "production": {
-        "env_key": "JAWSDB_URL",
+        "use_env_value": "JAWSDB_URL",
         "dialect": "mysql"
     }
 }

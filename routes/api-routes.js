@@ -9,22 +9,22 @@ module.exports = function (app) {
 
     /*Builds*/
     app.get("/api/builds/all", function (req, res) {
-        var dbQuery = `SELECT * FROM builds`;
-        connection.query(dbQuery, function (err, result) {
-            if (err) throw err;
-            res.json(result);
-        });
+        db.Build.findAll({
+            include: [db.Customer], //unsecure as it exposes the 'id'
+            raw: true
+        }).then(function (build) {
+            res.json(build);
+        })
     });
 
     // Get all builds of category type -- Byron
-    app.get("/api/build/category", function (req, res) {
+    app.get("/api/builds/:category", function (req, res) {
         db.Build.findAll({
             where: {
                 category: req.params.category
-            }
-        }).then(function (dbBuild) {
-            console.log(dbBuild);
-            res.json(dbBuild);
+            },
+        }).then(function (data) {
+            res.json(data);
         });
     });
 
@@ -34,9 +34,8 @@ module.exports = function (app) {
             where: {
                 name: req.params.name
             }
-        }).then(function (dbBuildName) {
-            console.log(dbBuildName);
-            res.json(dbBuildName);
+        }).then(function (data) {
+            res.json(data);
         });
     });
 

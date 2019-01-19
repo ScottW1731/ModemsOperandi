@@ -22,6 +22,7 @@ module.exports = function (app) {
             where: {
                 category: req.params.category
             },
+            include: [db.Customer]
         }).then(function (data) {
             res.json(data);
         });
@@ -32,7 +33,8 @@ module.exports = function (app) {
         db.Build.findOne({
             where: {
                 name: req.params.name
-            }
+            },
+            include: [db.Customer],
         }).then(function (data) {
             res.json(data);
         });
@@ -45,13 +47,15 @@ module.exports = function (app) {
                 category: req.params.category,
                 price: req.params.price,
                 use: req.params.use,
-            }
+            },
+            include: [db.Customer],
         }).then(function (build) {
             res.json(build);
         });
     });
 
     app.post("/api/builds/new", function (req, res) {
+        //todo: if no customer, customerId is set to null.
         db.Build.create(req.body).then(function (build) {
             res.json(build)
         });

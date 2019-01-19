@@ -6,8 +6,6 @@ var environment = process.env.NODE_ENV || "development";
 var config = require(__dirname + "/../config/config.json")[environment];
 var db = {};
 
-console.log(config)
-
 if (config.use_env_value) {
     var sequelize = new Sequelize(process.env[config.use_env_value]);
 } else {

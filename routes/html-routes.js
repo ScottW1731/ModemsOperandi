@@ -1,5 +1,6 @@
 module.exports = function(app) {
-    app.get("/", function (req, res) {
-        res.render("index");
+    //landing page
+    app.get("/", function(req, res) {
+        res.render("index", { image_url: "./public/images/darkroom.jpg" });
     });
 };

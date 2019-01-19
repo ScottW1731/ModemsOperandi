@@ -1,4 +1,4 @@
-select c.name, b.name, p.name, p.cost
+select c.name, b.name, b.category, p.name, p.cost
 	from customers c 
     join builds b
 		on c.id = b.customerId

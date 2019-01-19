@@ -4,7 +4,8 @@
 insert into customers (id, name, email) values (1138, "mike", "michael.n.preston@gmail.com");
 
 /* Builds */
-insert into builds (id, customerId, name) values (12345, 1138, "super-special-awesum build");
+insert into builds (id, customerId, category, name) values (12345, 1138, "Gaming", "super-special-awesum build");
+insert into builds (customerId, category, name) values (0042, "Gaming", "dbz");
 
 /* Parts */
 insert into parts (name, cost) values ("Intel Core i3-8100", 118.99);

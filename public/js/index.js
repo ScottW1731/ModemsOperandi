@@ -1,5 +1,4 @@
 // this is going to be a manual feature for inputing parts
-
 // CPU
 // require input from user submit box
 // append to page
@@ -21,25 +20,23 @@
 // Peripherals
 // Accessories/ Other
 // Custom parts
-
 /* global moment */
-
   // When user builds (clicks addBtn)
+  // thank you miachel
+  // global variable div
 
+var div = $("#append-here")
   $(document).on("click", "#submit-pc", function(event) {
+    // console.log("test")
     event.preventDefault();
-    $("#append-here").append($("#cpu-input").val());
-    $("#cpu-input").val("");
-
-    $("#append-here").append($("#mb-input").val());
-    $("#mb-input").val("");
-
-    $("#append-here").append($("#gpu-input").val());
-    $("#gpu-input").val("");
-
-    $("#append-here").append($("#cooler-input").val());
-    $("#cooler-input").val("");
-
-    $("#append-here").append($("#memory-input").val());
-    $("#memory-input").val("");
+    div.append($("#cpu-input").val());
+    
+    div.append($("#mb-input").val());
+    
+    div.append($("#gpu-input").val());
+    
+    div.append($("#cooler-input").val());
+    
+    div.append($("#memory-input").val());
+    
   });

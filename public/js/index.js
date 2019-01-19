@@ -25,31 +25,13 @@
 /* global moment */
 
 // When the page loads, grab and display all of our builds
-$.get("/api/all", function(data) {
-
-    if (data.length !== 0) {
-  
-      for (var i = 0; i < data.length; i++) {
-  
-        var row = $("<div>");
-        row.addClass("build");
-  
-        row.append("<p>" + data[i].part + " builded.. </p>");
-        row.append("<p>" + data[i].price + "</p>");
-        row.append("<p>At " + moment(data[i].created_at).format("h:mma on dddd") + "</p>");
-  
-        $(".build-area").prepend(row);
-  
-      }
-  
-    }
-});
-
   
   // When user builds (clicks addBtn)
-  $(".build-submit").on("click", function(event) {
+  $(document).on("click", "#submit-pc", function(event) {
     event.preventDefault();
-});
+    $("#append-here").append($("#cpu-input").val());
+    $("#cpu-input").val("");
+  });
 //     // Make a newbuild object
 //     var newbuild = {
 //       part: $("#part").val().trim(),

@@ -11,10 +11,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true,
         },
-        // customerId: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: false,
-        // }
+        customerId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        }
     }, {
         timestamps: false
     });

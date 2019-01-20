@@ -2,34 +2,73 @@
 // api-routes.js - this file offers a set of routes for displaying and saving data to the db
 // *********************************************************************************
 
-// Dependencies
-// =============================================================
-var connection = require("../config/connection.js");
+require("../config/connection.js");
+var db = require("../models");
 
-// Routes
-// =============================================================
-module.exports = function(app) {
-  // Get all builds
-  app.get("/api/all", function(req, res) {
-    var dbQuery = "SELECT * FROM builds";
+module.exports = function (app) {
 
-    connection.query(dbQuery, function(err, result) {
-      if (err) throw err;
-      res.json(result);
+    /*Builds*/
+    app.get("/api/builds/all", function (req, res) {
+        db.Build.findAll({
+            include: [db.Customer], //unsecure as it exposes the 'id'
+        }).then(function (build) {
+            res.json(build);
+        })
     });
-  });
 
-  // Add a builds
-  app.post("/api/new", function(req, res) {
-    console.log("builds Data:");
-    console.log(req.body);
-
-    var dbQuery = "INSERT INTO builds (author, body, created_at) VALUES (?,?,?)";
-
-    connection.query(dbQuery, [req.body.author, req.body.body, req.body.created_at], function(err, result) {
-      if (err) throw err;
-      console.log("builds Successfully Saved!");
-      res.end();
+    // Get all builds of category type -- Byron
+    app.get("/api/builds/:category", function (req, res) {
+        db.Build.findAll({
+            where: {
+                category: req.params.category
+            },
+            include: [db.Customer]
+        }).then(function (data) {
+            res.json(data);
+        });
     });
-  });
+
+    // Get build of certain name -- Byron
+    app.get("/api/build/:name", function (req, res) {
+        db.Build.findOne({
+            where: {
+                name: req.params.name
+            },
+            include: [db.Customer],
+        }).then(function (data) {
+            res.json(data);
+        });
+    });
+
+    // Get build of Customer search Type, Price, Use Questionaire -- Byron
+    app.get("/api/builds/:", function (req, res) {
+        db.Build.findAll({
+            where: {
+                category: req.params.category,
+                price: req.params.price,
+                use: req.params.use,
+            },
+            include: [db.Customer],
+        }).then(function (build) {
+            res.json(build);
+        });
+    });
+
+    app.post("/api/builds/new", function (req, res) {
+        //todo: if no customer, customerId is set to null.
+        db.Build.create(req.body).then(function (build) {
+            res.json(build)
+        });
+    });
+
+    // Delete Build -- Byron
+    app.delete("/api/delete/build/:id", function (req, res) {
+        db.Build.destroy({
+            where: {
+                id: req.params.id
+            }
+        }).then(function (build) {
+            res.json(build);
+        });
+    });
 };

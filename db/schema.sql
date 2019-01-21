@@ -8,7 +8,7 @@ drop table if exists categories;
 create table builds
 (
 	id int not null AUTO_INCREMENT,
-	customerId int not null,
+	customerId int default null,
 	name varchar(150) not null,
     category varchar(150), 
 	primary key (id)
@@ -21,6 +21,13 @@ create table parts
 	cost double(12, 2),	
     categoryId varchar(150),
 	primary key (id)
+);
+
+create table prefabs(
+    id int not null AUTO_INCREMENT,
+    name varchar(150),
+    permalink varchar(350),
+    primary key (id)
 );
 
 /* parts <-===-> a customer's build */

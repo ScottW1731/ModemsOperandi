@@ -9,10 +9,12 @@ var dotenvPath = path.resolve('./.env');
 require('dotenv').config({
     path: dotenvPath
 });
+
 const Password = process.env.Password;
+const JAWSDB_URL = process.env.JAWSDB_URL;
 
 const config = {
-    database: "build_test", // TODO: set this from config.json > development vars
+    database: "pc_builder", // TODO: set this from config.json > development vars
     user: "root",
     host: "localhost",
     password: Password,
@@ -21,7 +23,15 @@ const config = {
     multipleStatements: true,
 }
 
-var connection = mysql.createConnection(config);
+var connection;
+
+if (JAWSDB_URL) {
+    connection = mysql.createConnection(JAWSDB_URL);
+    console.log('Connected to JawsDB')
+} else {
+    connection = mysql.createConnection(config);
+    console.log('Connected to ' + config.host + " " + config.port)
+}
 
 connection.connect(function (err) {
     if (err) {

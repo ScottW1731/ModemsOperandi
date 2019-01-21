@@ -6,16 +6,17 @@ module.exports = function (sequelize, DataTypes) {
             validate: {
                 len: [1]
             }
-        }, 
-        category: {
-            type:DataTypes.STRING,
-            allowNull: true,
+        },
+        categoryId: {
+            type: DataTypes.INTEGER,
+            allowNull: true
         },
         cost: {
-            type:DataTypes.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
+    }, {
+        timestamps: false
     });
-    return Part ;
+    return Part;
 };
-

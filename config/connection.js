@@ -14,7 +14,7 @@ const Password = process.env.Password;
 const JAWSDB_URL = process.env.JAWSDB_URL;
 
 const config = {
-    database: "build_test", // TODO: set this from config.json > development vars
+    database: "pc_builder", // TODO: set this from config.json > development vars
     user: "root",
     host: "localhost",
     password: Password,

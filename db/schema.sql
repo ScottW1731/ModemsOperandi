@@ -23,6 +23,13 @@ create table parts
 	primary key (id)
 );
 
+create table prefabs(
+    id int not null AUTO_INCREMENT,
+    name varchar(150),
+    permalink varchar(350),
+    primary key (id)
+);
+
 /* parts <-===-> a customer's build */
 create table build_parts_xref(
     partId int not null,

@@ -59,7 +59,7 @@ module.exports = function (app) {
     app.post("/api/builds/new", function (req, res) {
         //todo: if no customer, customerId is set to null.
         db.Build.create(req.body).then(function (build) {
-            res.json(build)
+            res.json(build);
         });
     });
 
@@ -71,6 +71,32 @@ module.exports = function (app) {
             }
         }).then(function (build) {
             res.json(build);
+        });
+    });
+
+    /*Parts*/
+    app.get("/api/parts/all", function (req, res) {
+        db.Part.findAll({}).then(function (parts) {
+            res.json(parts);
+        })
+    });
+
+    app.post("/api/parts/new", function (req, res) {
+        db.Part.create(req.body).then(function (part) {
+            res.json(part);
+        });
+    });
+
+    /*Customers*/
+    app.get("/api/customers/all", function (req, res) {
+        db.Customer.findAll({}).then(function (customers) {
+            res.json(customers);
+        })
+    });
+
+    app.post("/api/customers/new", function (req, res) {
+        db.Customer.create(req.body).then(function (customers) {
+            res.json(customers);
         });
     });
 };

@@ -8,7 +8,7 @@ drop table if exists categories;
 create table builds
 (
 	id int not null AUTO_INCREMENT,
-	customerId int not null,
+	customerId int default null,
 	name varchar(150) not null,
     category varchar(150), 
 	primary key (id)

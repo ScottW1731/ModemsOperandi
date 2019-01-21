@@ -7,6 +7,8 @@ var db = require("../models");
 
 module.exports = function (app) {
 
+    // TODO: getCategories() : 'select distinct name from categories'
+
     /*Builds*/
     app.get("/api/builds/all", function (req, res) {
         db.Build.findAll({

@@ -9,6 +9,7 @@ var express = require("express");
 var db = require("./models");
 var exphbs = require("express-handlebars");
 
+
 // Sets up the Express App
 // =============================================================
 var app = express();
@@ -20,12 +21,19 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 
+// Set Handlebars as the default templating engine.
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
 // Static directory to be served
 app.use(express.static("public"));
 
 // Routes
 // =============================================================
 require("./routes/api-routes.js")(app);
+require("./routes/html-routes.js")(app);
 
 // Starts the server to begin listening
 // =============================================================
@@ -36,7 +44,7 @@ var syncOptions = {
 
 db.sequelize.sync(syncOptions).then(function () {
     app.listen(PORT, function () {
-        console.log("App listening on PORT " + PORT);
+        console.log("App listening on http://localhost:" + PORT);
     });
 });
 

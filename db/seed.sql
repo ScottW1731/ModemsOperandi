@@ -52,3 +52,6 @@ insert into build_types (name) values ('Gaming');
 insert into build_types (name) values ('Mac');
 insert into build_types (name) values ('Linux');
 insert into build_types (name) values ('Custom');
+
+# For our web-crawler & parser
+insert into prefabs (name, permalink) values ("Leche Naranja", "https://pcpartpicker.com/b/Qf4qqs");

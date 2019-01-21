@@ -13,3 +13,4 @@ select * from categories;
 select * from parts;
 select * from build_parts_xref;
 select * from build_types;
+select * from prefabs;

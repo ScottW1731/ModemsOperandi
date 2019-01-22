@@ -25,7 +25,7 @@ const config = {
 
 var connection;
 
-if (!JAWSDB_URL) {
+if (JAWSDB_URL) {
     connection = mysql.createConnection(JAWSDB_URL);
     console.log('Connected to JawsDB')
 } else {

@@ -4,6 +4,7 @@ drop table if exists parts;
 drop table if exists customers;
 drop table if exists build_parts_xref;
 drop table if exists categories;
+drop table if exists prefabs;
 
 create table builds
 (

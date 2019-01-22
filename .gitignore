@@ -3,3 +3,5 @@ node_modules
 npm-debug.log
 .env
 test.sql
+geckodriver.log
+build_data.json

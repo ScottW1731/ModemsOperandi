@@ -8,6 +8,7 @@ var db = require("../models");
 module.exports = function (app) {
 
     // TODO: getCategories() : 'select distinct name from categories'
+    // TODO: getPartType() : "select distinct name from parts"
 
     /*Builds*/
     app.get("/api/builds/all", function (req, res) {
@@ -32,6 +33,7 @@ module.exports = function (app) {
 
     // Get build of certain name -- Byron
     app.get("/api/build/:name", function (req, res) {
+        if (!req.params.name) throw Error("build name cannot be null!");
         db.Build.findOne({
             where: {
                 name: req.params.name
@@ -47,8 +49,6 @@ module.exports = function (app) {
         db.Build.findAll({
             where: {
                 category: req.params.category,
-                price: req.params.price,
-                use: req.params.use,
             },
             include: [db.Customer],
         }).then(function (build) {

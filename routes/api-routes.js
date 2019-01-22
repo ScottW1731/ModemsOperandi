@@ -63,6 +63,19 @@ module.exports = function (app) {
         });
     });
 
+    // update build -- Byron
+    app.put("/api/builds", function(req, res) {
+        db.Build.update({
+          name: req.body.name,
+          category: req.body.category,
+        }, {
+          where: {
+            id: req.body.id
+          }
+        }).then(function(dbBuild) {
+          res.json(dbBuild);
+        });
+
     // Delete Build -- Byron
     app.delete("/api/delete/build/:id", function (req, res) {
         db.Build.destroy({
@@ -86,6 +99,22 @@ module.exports = function (app) {
             res.json(part);
         });
     });
+
+    // update parts --Byron
+    app.put("/api/parts", function(req, res) {
+        
+    db.Part.update({
+      name: req.body.name,
+      cost: req.body.cost,
+      categoryId: req.body.categoryId,
+    }, {
+      where: {
+        id: req.body.id
+      }
+    }).then(function(dbPart) {
+      res.json(dbPart);
+    }); 
+
 
     /*Customers*/
     app.get("/api/customers/all", function (req, res) {

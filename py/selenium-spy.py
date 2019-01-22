@@ -33,14 +33,6 @@ def getSoup(url):
     return BeautifulSoup(plain_text, features="html.parser")
 
 
-print("setting up driver...")
-driver = webdriver.Firefox()
-print("waiting...")
-driver.implicitly_wait(30)
-
-datalist = []  # empty list
-
-
 def extract(permalink):
 
     if ("/b/" in permalink):
@@ -68,20 +60,31 @@ def extract(permalink):
     datalist.append(df[0])
 
 
-for permalink in links:
-    extract(permalink)
+print("setting up driver...")
+driver = webdriver.Firefox()
+print("waiting...")
+driver.implicitly_wait(30)
 
-driver.quit()
-
-# combine all pandas dataframes in the list into one big dataframe
-result = pd.concat([pd.DataFrame(datalist[i])
-                    for i in range(len(datalist))], ignore_index=True)
+datalist = []  # empty list
 
 
-# convert the pandas dataframe to JSON
-json_records = result.to_json(orient='records')
+def download_builds():
+    for permalink in links:
+        extract(permalink)
 
-path = os.getcwd()
-fs = open(path+"\\build_data.json", "w")
-fs.write(json_records)
-fs.close()
+    driver.quit()
+    # combine all pandas dataframes in the list into one big dataframe
+    result = pd.concat([pd.DataFrame(datalist[i])
+                        for i in range(len(datalist))], ignore_index=True)
+
+    # convert the pandas dataframe to JSON
+    json_records = result.to_json(orient='records')
+
+    path = os.getcwd()
+    fs = open(path+"\\build_data.json", "w")
+    fs.write(json_records)
+    fs.close()
+
+
+### MAIN ###
+download_builds()

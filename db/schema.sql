@@ -18,7 +18,8 @@ create table builds
 create table parts
 (
 	id int not null AUTO_INCREMENT,
-	name varchar(255),
+	#name varchar(255),
+	name text,
 	cost double(12, 2),	
     categoryId int,
     img_url varchar(250) null,

@@ -8,6 +8,7 @@ var db = require("../models");
 module.exports = function (app) {
 
     // TODO: getCategories() : 'select distinct name from categories'
+    // TODO: getPartType() : "select distinct name from parts"
 
     /*Builds*/
     app.get("/api/builds/all", function (req, res) {
@@ -47,8 +48,6 @@ module.exports = function (app) {
         db.Build.findAll({
             where: {
                 category: req.params.category,
-                price: req.params.price,
-                use: req.params.use,
             },
             include: [db.Customer],
         }).then(function (build) {

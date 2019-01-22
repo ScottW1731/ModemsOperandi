@@ -32,6 +32,7 @@ module.exports = function (app) {
 
     // Get build of certain name -- Byron
     app.get("/api/build/:name", function (req, res) {
+        if (!req.params.name) throw Error("build name cannot be null!");
         db.Build.findOne({
             where: {
                 name: req.params.name

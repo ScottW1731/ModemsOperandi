@@ -1,5 +1,4 @@
 // this is going to be a manual feature for inputing parts
-
 // CPU
 // require input from user submit box
 // append to page
@@ -21,62 +20,40 @@
 // Peripherals
 // Accessories/ Other
 // Custom parts
-
 /* global moment */
+// When user builds (clicks addBtn)
+// thank you miachel
+// global variable div
 
-// When the page loads, grab and display all of our builds
-$.get("/api/all", function(data) {
 
-    if (data.length !== 0) {
-  
-      for (var i = 0; i < data.length; i++) {
-  
-        var row = $("<div>");
-        row.addClass("build");
-  
-        row.append("<p>" + data[i].part + " builded.. </p>");
-        row.append("<p>" + data[i].price + "</p>");
-        row.append("<p>At " + moment(data[i].created_at).format("h:mma on dddd") + "</p>");
-  
-        $(".build-area").prepend(row);
-  
-      }
-  
-    }
-});
+var div = $("#append-here");
+var inputs = [];
 
-  
-  // When user builds (clicks addBtn)
-  $(".build-submit").on("click", function(event) {
+$(document).on("click", "#submit-pc", function (event) {
     event.preventDefault();
+
+    //Clear the form:
+    inputs.length = 0;
+    div.empty();
+
+    //Get all inputs, print and upsert: 
+    $('input').each(function () {
+
+        var item = {
+            name: this.value.trim(),
+            category: "Gaming"
+        };
+
+        inputs.push(item);
+
+        //todo: make this a bulk operation on the array of items using sequelize.bulk
+        upsert(item);
+        div.append(item.name + " ");
+    });
 });
-//     // Make a newbuild object
-//     var newbuild = {
-//       part: $("#part").val().trim(),
-//       price: $("#build-box").val().trim(),
-//       created_at: moment().format("YYYY-MM-DD HH:mm:ss")
-//     };
-  
-//     console.log(newbuild);
-  
-//     // Send an AJAX POST-request with jQuery
-//     $.post("/api/new", newbuild)
-//       // On success, run the following code
-//       .then(function() {
-  
-//         var row = $("<div>");
-//         row.addClass("build");
-  
-//         row.append("<p>" + newbuild.part + " builded: </p>");
-//         row.append("<p>" + newbuild.price + "</p>");
-//         row.append("<p>At " + moment(newbuild.created_at).format("h:mma on dddd") + "</p>");
-  
-//         $("#build-area").prepend(row);
-  
-//       });
-  
-//     // Empty each input box by replacing the value with an empty string
-//     $("#part").val("");
-//     $("#build-box").val("");
-//   });
-  
+
+function upsert(data) {
+    $.post("/api/builds/new", data).then(function (result) {
+        console.log(result)
+    })
+}

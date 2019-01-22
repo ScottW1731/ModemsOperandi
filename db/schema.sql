@@ -20,7 +20,7 @@ create table parts
 	id int not null AUTO_INCREMENT,
 	name varchar(150),
 	cost double(12, 2),	
-    categoryId varchar(150),
+    categoryId int,
     img_url varchar(250) null,
 	primary key (id)
 );

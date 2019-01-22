@@ -8,11 +8,11 @@ from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 import re
 import pandas as pd
-from tabulate import tabulate
 import os
 import requests
 import pymysql
 import json
+#from tabulate import tabulate
 
 base = "https://pcpartpicker.com"
 links = ["https://pcpartpicker.com/b/Qf4qqs",

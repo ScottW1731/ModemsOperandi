@@ -2,13 +2,24 @@
 // api-routes.js - this file offers a set of routes for displaying and saving data to the db
 // *********************************************************************************
 
-require("../config/connection.js");
+var connection = require("../config/connection.js");
 var db = require("../models");
 
 module.exports = function (app) {
 
-    // TODO: getCategories() : 'select distinct name from categories'
-    // TODO: getPartType() : "select distinct name from parts"
+    app.get("/api/build/types", function (req, res) {
+        connection.query("select distinct * from build_types", function (err, result, fields) {
+            if (err) throw err;
+            res.json(result)
+        })
+    });
+
+    app.get("/api/part/categories", function (req, res) {
+        connection.query("select distinct * from categories", function (err, result, fields) {
+            if (err) throw err;
+            res.json(result)
+        })
+    });
 
     /*Builds*/
     app.get("/api/builds/all", function (req, res) {
@@ -63,6 +74,20 @@ module.exports = function (app) {
         });
     });
 
+    // update build -- Byron
+    app.put("/api/builds", function (req, res) {
+        db.Build.update({
+            name: req.body.name,
+            category: req.body.category,
+        }, {
+            where: {
+                id: req.body.id
+            }
+        }).then(function (dbBuild) {
+            res.json(dbBuild);
+        });
+    });
+
     // Delete Build -- Byron
     app.delete("/api/delete/build/:id", function (req, res) {
         db.Build.destroy({
@@ -87,6 +112,22 @@ module.exports = function (app) {
         });
     });
 
+    // update parts --Byron
+    app.put("/api/parts", function (req, res) {
+
+        db.Part.update({
+            name: req.body.name,
+            cost: req.body.cost,
+            categoryId: req.body.categoryId,
+        }, {
+            where: {
+                id: req.body.id
+            }
+        }).then(function (dbPart) {
+            res.json(dbPart);
+        });
+    })
+
     /*Customers*/
     app.get("/api/customers/all", function (req, res) {
         db.Customer.findAll({}).then(function (customers) {
@@ -99,4 +140,4 @@ module.exports = function (app) {
             res.json(customers);
         });
     });
-};
+}

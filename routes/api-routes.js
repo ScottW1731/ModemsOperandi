@@ -2,13 +2,24 @@
 // api-routes.js - this file offers a set of routes for displaying and saving data to the db
 // *********************************************************************************
 
-require("../config/connection.js");
+var connection = require("../config/connection.js");
 var db = require("../models");
 
 module.exports = function (app) {
 
-    // TODO: getCategories() : 'select distinct name from categories'
-    // TODO: getPartType() : "select distinct name from parts"
+    app.get("/api/build/types", function (req, res) {
+        connection.query("select distinct * from build_types", function (err, result, fields) {
+            if (err) throw err;
+            res.json(result)
+        })
+    });
+
+    app.get("/api/part/categories", function (req, res) {
+        connection.query("select distinct * from categories", function (err, result, fields) {
+            if (err) throw err;
+            res.json(result)
+        })
+    });
 
     /*Builds*/
     app.get("/api/builds/all", function (req, res) {

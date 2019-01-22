@@ -1,8 +1,8 @@
 # search: https: // pcpartpicker.com/b/Qf4qqs
 # the embed(reroute): <a href="/list/7prrXP">View full price breakdown</a>
 
-import mysql.connector
 from bs4 import BeautifulSoup
+import mysql.connector
 import requests
 import time
 import urllib.request
@@ -20,6 +20,7 @@ def findStub(searchUrl):
         links = div.select('h2 a')
         if(len(links) > 0):
             stub = links[0].get('href')
+            print("stub: " + stub)
             return stub
 
 
@@ -30,6 +31,27 @@ def getSoup(url):
     source_code = requests.get(url)
     plain_text = source_code.text
     return BeautifulSoup(plain_text, features="html.parser")
+
+
+def extract(permalink):
+    stub = findStub(permalink)
+    nextUrl = base+stub
+    print("next: " + nextUrl)
+    soup = getSoup(nextUrl)
+    # todo: switch between tag ids:
+    a_tag = soup.find('a', {"id": "export_markup_plaintext"})
+    href = a_tag.get('href')
+    print(a_tag)
+    print(href)
+    textarea = soup.findAll('textarea', {"id": "markup_text"})[0]
+    print(textarea)
+
+
+# def click(img):
+#     if img:
+#         a_tag = img[0].parent
+#         href = a_tag.get('href')
+#         print (href)
 
 
 connection = mysql.connector.connect(
@@ -55,12 +77,7 @@ prefabNum = "Qf4qqs"
 permalink = base + "/b/" + prefabNum
 print("permalink URL: " + permalink)
 
-stub = findStub(permalink)
-print("stub: " + stub)
-nextUrl = base+stub
-print("next: " + nextUrl)
-soup = getSoup(nextUrl)
-print(soup.findAll('textarea', {"id": "markup_text"})[0])
+extract(permalink)
 
 end = time.time()
 print(end-start)

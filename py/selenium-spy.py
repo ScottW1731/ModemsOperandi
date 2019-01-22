@@ -1,5 +1,7 @@
 # source idea: https://medium.freecodecamp.org/better-web-scraping-in-python-with-selenium-beautiful-soup-and-pandas-d6390592e251
-# support: https://stackoverflow.com/questions/42524114/how-to-install-geckodriver-on-a-windows-system
+# ** Supporting links **
+# https://stackoverflow.com/questions/42524114/how-to-install-geckodriver-on-a-windows-system
+# https://blog.softhints.com/python-read-validate-and-import-csv-json-file-to-mysql/#JSON
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -9,6 +11,8 @@ import pandas as pd
 from tabulate import tabulate
 import os
 import requests
+import pymysql
+import json
 
 base = "https://pcpartpicker.com"
 links = ["https://pcpartpicker.com/b/Qf4qqs",
@@ -66,6 +70,7 @@ print("waiting...")
 driver.implicitly_wait(30)
 
 datalist = []  # empty list
+saveFileName = "build_data.json"
 
 
 def download_builds():
@@ -81,10 +86,57 @@ def download_builds():
     json_records = result.to_json(orient='records')
 
     path = os.getcwd()
-    fs = open(path+"\\build_data.json", "w")
+    savePath = path+"\\" + saveFileName
+    print('path: ' + savePath)
+    fs = open(savePath, "w")
     fs.write(json_records)
     fs.close()
 
 
+# do validation and checks before insert:
+def validate_string(val):
+    if val != None:
+        if type(val) is int:
+            # for x in val:
+            #   print(x)
+            return str(val).encode('utf-8')
+        else:
+            return val
+
+# read JSON file & store to mysql db:
+def store_to_db():
+    path = os.getcwd()
+    savePath = path+"\\" + saveFileName
+    
+    json_data = open(savePath).read()
+    json_obj = json.loads(json_data)
+    
+    # connect to MySQL
+    con = pymysql.connect(host='localhost', user='root',
+                          passwd='birman', db='pc_builder')
+    cursor = con.cursor()
+
+    # parse json data to SQL insert
+    for i, item in enumerate(json_obj):
+
+        name = validate_string(item.get("Selection", None))
+        cost = validate_string(item.get("Price", None))
+
+        if name == None or cost == None:
+            continue
+
+        if cost == None:
+            cost = validate_string(item.get("Base", None))       
+        # todo: IFF no price can be found at all, click the link and extract price(s)        
+        print(name)
+        cost = cost.replace("$", "")
+        cursor.execute(
+            "INSERT INTO parts (name, cost) VALUES (%s, %s)", (name, cost))
+
+    con.commit()
+    con.close()
+
+
 ### MAIN ###
 download_builds()
+store_to_db()

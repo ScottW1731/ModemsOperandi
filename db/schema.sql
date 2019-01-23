@@ -57,6 +57,6 @@ create table customers(
 	id int not null auto_increment,
 	name varchar(150),
     email varchar(150),
-    password varchar(50) not null default '',
+    password text not null,
 	primary key (id)
 );

@@ -4,6 +4,11 @@
             <form action="/signup" method="post" id="signup">
                 <p class="h4 text-center py-4">Sign up</p>
                 <div class="md-form">
+                    <i class="fa fa-user prefix grey-text"></i>
+                    <input type="text" id="user-name" class="form-control" name="userName">
+                    <label for="user-name" class="font-weight-light">User Name</label>
+                </div>
+                <div class="md-form">
                     <i class="fa fa-envelope prefix grey-text"></i>
                     <input type="email" id="email" class="form-control" name="email">
                     <label for="email" class="font-weight-light">Your email</label>
@@ -22,7 +27,7 @@
                 <div class="text-center py-4 mt-3">
                     <button class="btn peach-gradient text-dark" type="submit">Register</button>
                 </div>
-                
+
             </form>
             <p>Already a member? <a href="{{login}}">login</a></p>
             <p><a href="{{home}}">Home</a></p>

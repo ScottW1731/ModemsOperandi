@@ -29,7 +29,9 @@
         $('input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=number], input[type=search], input[type=date], input[type=time], textarea').focus(function () {
             $(this).siblings('label').addClass('active');
        }).blur(function() {
-            $(this).siblings('label').removeClass('active');
+            if ($(this).val() === "") {
+                $(this).siblings('label').removeClass('active');
+            }
        });
     </script>
 </body>

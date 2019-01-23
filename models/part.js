@@ -1,4 +1,4 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = function(sequelize, DataTypes) {
     var Part = sequelize.define("Part", {
         name: {
             type: DataTypes.STRING,
@@ -14,6 +14,10 @@ module.exports = function (sequelize, DataTypes) {
         cost: {
             type: DataTypes.INTEGER,
             allowNull: false,
+        },
+        img_url: {
+            type: DataTypes.STRING,
+            allowNull: true,
         },
     }, {
         timestamps: false

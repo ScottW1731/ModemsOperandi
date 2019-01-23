@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    var Build = sequelize.define("Build", {
+    var Build = sequelize.define("build", {
         name: {
             type: DataTypes.STRING,
             allowNull: false,

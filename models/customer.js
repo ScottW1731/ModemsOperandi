@@ -3,7 +3,7 @@
 var bcrypt = require("bcrypt-nodejs");
 // Creating our Customer model
 module.exports = function (sequelize, DataTypes) {
-    var Customer = sequelize.define("Customer", {
+    var Customer = sequelize.define("customer", {
         id: {
             primaryKey: true,
             type: DataTypes.INTEGER,

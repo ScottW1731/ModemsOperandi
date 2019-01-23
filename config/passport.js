@@ -43,6 +43,7 @@ module.exports = function(passport, user) {
           // console.log("testing one two three: " + req.body.passwordConfirm);
           var userPassword = generateHash(password);
           var data = {
+            name: req.body.userName,
             email: email,
             password: userPassword,
           };

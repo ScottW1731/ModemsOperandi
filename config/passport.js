@@ -28,7 +28,7 @@ module.exports = function(passport, user) {
       var generateHash = function(password) {
         return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
       };
-
+      
       User.findOne({
         where: {
           email: email
@@ -36,9 +36,14 @@ module.exports = function(passport, user) {
       }).then(function(user) {
         if (user) {
           return done(null, false, { message: "That email is already taken"});
+        } else if (req.body.password !== req.body.passwordConfirm) {
+          console.log("passwords do not match");
+          return done(null, false, { message: "Passwords do not match"});
         } else {
+          // console.log("testing one two three: " + req.body.passwordConfirm);
           var userPassword = generateHash(password);
           var data = {
+            name: req.body.userName,
             email: email,
             password: userPassword,
           };

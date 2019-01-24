@@ -85,15 +85,15 @@ module.exports = function(app, passport) {
       console.log(build[0].dataValues);
       res.json(build);
     });
-    
   });
 
   app.get("/staticbuild", function(req, res) {
     db.StaticBuild.findAll({
       where: {
-        id: 1
+        id: 4
       }
     }).then(function(build) {
+      var reqPath = req.protocol + "://" + req.get("host");
       var pcBuild = [
         {
           Component: "CPU",
@@ -136,7 +136,25 @@ module.exports = function(app, passport) {
           Price: build[0].dataValues.price
         }
       ];
-      res.render("build", { pcBuild });
+      if (req.isAuthenticated) {
+        res.render("build", {
+          link1: "/profile",
+          text1: "Profile",
+          link2: "/logout",
+          text2: "Logout",
+          main_image: reqPath + "/images/rafael-pol-474017-unsplash.jpg",
+          pcBuild
+        });
+      } else {
+        res.render("build", {
+          link1: "/login",
+          text1: "Login",
+          link2: "/signup",
+          text2: "Signup",
+          main_image: reqPath + "/images/rafael-pol-474017-unsplash.jpg",
+          pcBuild
+        })
+      }
     });
   });
 };

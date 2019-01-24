@@ -146,19 +146,19 @@ module.exports = function (app) {
     // Get a customer's full profile, including builds, parts, cost, email, etc.
     //TODO: Abstractify this query using Sequelize (reason: db may not always be mysql dialect!)
     app.get("/api/customers/:id", function (req, res) {
-        // if (!req.params.id) throw Error("customer id cannot not be null!");
-        // connection.query(`        
-        //     select c.name, c.email, b.name, b.category, p.name, p.cost
-        //         from customers c
-        //         join builds b
-        //             on c.id = b.customerId
-        //         join build_parts_xref bps
-        //             on b.id = bps.buildId
-        //         join parts p
-        //             on p.id = bps.partId;
-        // `, function (err, result, fields) {
-        //     if (err) throw err;
-        //     res.json(result);
-        // })
+        if (!req.params.id) throw Error("customer id cannot not be null!");
+        connection.query(`        
+            select c.name, c.email, b.name, b.category, p.name, p.cost
+            from customers c
+                join builds b
+            on c.id = b.customerId
+                join build_parts_xref bps
+            on b.id = bps.buildId
+                join parts p
+            on p.id = bps.partId;
+        `, function (err, result, fields) {
+            if (err) throw err;
+            res.json(result);
+        })
     })
 }

@@ -20,10 +20,20 @@ con = pymysql.connect(host='localhost', user='root',
                       passwd='root', db='pc_builder')
 cursor = con.cursor()
 
-# Get all prefab urls that haven't been visited yet
-def getPrefabs():
+
+def getCategoryLookup():
+    cursor.execute("select name, id from categories")
+    result = cursor.fetchall()
+    result = list(result)
+    lookup = dict(result)
+    # print('categories', lookup)
+    # print('Accessories: ', lookup['Accessories'])
+    return lookup
+
+
+def getPrefabs():  # Get all prefab urls that haven't been visited yet
     prefabUrls = []
-    cursor.execute("select * from prefabs")
+    cursor.execute("select * from prefabs where visited = false")
     result = cursor.fetchall()
     # print (result)
     for x in result:
@@ -113,6 +123,11 @@ saveFileName = "build_data.json"
 
 
 def download_builds():
+
+    # TODO: have this function accept raw JSON data to consume!
+    if(len(links) == 0):
+        return
+
     for permalink in links:
         extract(permalink)
 
@@ -149,18 +164,21 @@ def store_to_db():
     json_obj = json.loads(json_data)
 
     skip_pattern = re.compile('^.*From parametric.*')
+    categories = getCategoryLookup()
 
     # parse json data to SQL insert
     for i, item in enumerate(json_obj):
 
         name = validate_string(item.get("Selection", None))
         cost = validate_string(item.get("Price", None))
+        url = validate_string(item.get("image_url", None))
+        category_name = validate_string(item.get("Component", None))
 
         if name == None:  # or cost == None
             continue
 
         m = skip_pattern.match(name)
-        if(m != None):
+        if m != None:
             continue
 
         if cost == None:
@@ -170,9 +188,15 @@ def store_to_db():
         if cost != None:
             cost = cost.replace("$", "")
 
+
+        if category_name != None:
+            category_id = categories[category_name]
+
+        #print('name: ', name, 'url: ', url, 'category id: ', category_id)
+
         # TODO: Make this a transaction over an array of objects to insert
         cursor.execute(
-            "INSERT INTO parts (name, cost) VALUES (%s, %s)", (name, cost))
+            "INSERT INTO parts (name, cost, categoryId, img_url) VALUES (%s, %s, %s, %s)", (name, cost, category_id, url))
 
     con.commit()
     con.close()

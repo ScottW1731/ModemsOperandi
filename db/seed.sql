@@ -24,18 +24,18 @@ insert into builds (customerId, category, name) values
 	(42, "Gaming", "'IT'");
 
 /* Parts */
-insert into parts (name, cost) values 
-    ("Intel Core i3-8100", 118.99),
-    ("Gigabyte B360M DSH3H", 74.99),
-    ("MSI Radeon RX 580 GB Armor", 209.99),
-    ("Intel Core i5-8600", 238.89),
-    ("Deepcool CAPTAIN 120EX WHITE 76.52", 68.94),
-    ("MSI - B360 GAMING ARCTIC ATX LGA1151 Motherboard", 129.99),
-    ("Corsair - Vengeance RGB Pro 16 GB (2 x 8 GB) DDR4-2666 Memory ", 129.99),
-    ("Samsung - 860 Evo 1 TB 2.5\" Solid State Drive", 157.99),  # TODO: escape quotes within string
-    ("Gigabyte - GeForce GTX 1070 Ti 8 GB Video Card", 439.99),
-    ("EVGA - DG-76 Alpine White ATX Mid Tower Case", 119.89),
-    ("Corsair - RMx (2018) 750 W 80+ Gold Certified Fully-Modular ATX Power Supply", 109.99);
+-- insert into parts (name, cost) values 
+--     ("Intel Core i3-8100", 118.99),
+--     ("Gigabyte B360M DSH3H", 74.99),
+--     ("MSI Radeon RX 580 GB Armor", 209.99),
+--     ("Intel Core i5-8600", 238.89),
+--     ("Deepcool CAPTAIN 120EX WHITE 76.52", 68.94),
+--     ("MSI - B360 GAMING ARCTIC ATX LGA1151 Motherboard", 129.99),
+--     ("Corsair - Vengeance RGB Pro 16 GB (2 x 8 GB) DDR4-2666 Memory ", 129.99),
+--     ("Samsung - 860 Evo 1 TB 2.5\" Solid State Drive", 157.99),  # TODO: escape quotes within string
+--     ("Gigabyte - GeForce GTX 1070 Ti 8 GB Video Card", 439.99),
+--     ("EVGA - DG-76 Alpine White ATX Mid Tower Case", 119.89),
+--     ("Corsair - RMx (2018) 750 W 80+ Gold Certified Fully-Modular ATX Power Supply", 109.99);
 
 /* Prefabs */
 insert into prefabs (name, permalink) values 

@@ -18,4 +18,6 @@ select name, count(name) from parts group by name having count(name) > 1;
 
 # Print the current contents:
 select * from prefabs order by visited desc;
-select * from parts order by name;
+select p.name, p.cost, p.img_url, c.name from parts p 	
+	join categories c on p.categoryId = c.id
+	order by p.name;

@@ -15,18 +15,21 @@ import json
 #from tabulate import tabulate
 
 base = "https://pcpartpicker.com"
-links = ["https://pcpartpicker.com/b/Qf4qqs",
-         "https://pcpartpicker.com/list/xtnFMZ",
-         "https://pcpartpicker.com/list/PB32GG",
-         "https://pcpartpicker.com/list/x27BHh",
-         "https://pcpartpicker.com/list/T6Fq29",
-         "https://pcpartpicker.com/list/pYBWTB",
-         "https://pcpartpicker.com/list/d8CB4q",
-         "https://pcpartpicker.com/list/XhwKV6",
-         "https://pcpartpicker.com/list/MCWwfH",
-         "https://pcpartpicker.com/list/Hbzjkd",
-         "https://pcpartpicker.com/list/4dcwq4",
-         ]
+# connect to MySQL
+con = pymysql.connect(host='localhost', user='root',
+                      passwd='root', db='pc_builder')
+cursor = con.cursor()
+
+# Get all prefab urls that haven't been visited yet
+def getPrefabs():
+    prefabUrls = []
+    cursor.execute("select * from prefabs")
+    result = cursor.fetchall()
+    # print (result)
+    for x in result:
+        # print(x[2])
+        prefabUrls.append(x[2])
+    return prefabUrls
 
 
 def findStub(searchUrl):
@@ -106,16 +109,12 @@ def download_builds():
 # do validation and checks before insert:
 def validate_string(val):
     if val != None:
-        if type(val) is int:
-            # for x in val:
-            #   print(x)
+        if type(val) is int:            
             return str(val).encode('utf-8')
         else:
             return val
 
 # read JSON file & store to mysql db:
-
-
 def store_to_db():
     path = os.getcwd()
     savePath = path+"\\" + saveFileName
@@ -123,10 +122,7 @@ def store_to_db():
     json_data = open(savePath).read()
     json_obj = json.loads(json_data)
 
-    # connect to MySQL
-    con = pymysql.connect(host='localhost', user='root',
-                          passwd='root', db='pc_builder')
-    cursor = con.cursor()
+    skip_pattern = re.compile('^.*From parametric.*')
 
     # parse json data to SQL insert
     for i, item in enumerate(json_obj):
@@ -134,14 +130,21 @@ def store_to_db():
         name = validate_string(item.get("Selection", None))
         cost = validate_string(item.get("Price", None))
 
-        if name == None or cost == None:
+        if name == None:  # or cost == None
+            continue
+
+        m = skip_pattern.match(name)
+        if(m != None):
             continue
 
         if cost == None:
             cost = validate_string(item.get("Base", None))
-        # todo: IFF no price can be found at all, click the link and extract price(s)
-        print(name)
-        cost = cost.replace("$", "")
+
+        # TODO: IFF no price can be found at all, click the link and extract price(s)
+        if cost != None:
+            cost = cost.replace("$", "")
+
+        # TODO: Make this a transaction over an array of objects to insert
         cursor.execute(
             "INSERT INTO parts (name, cost) VALUES (%s, %s)", (name, cost))
 
@@ -150,5 +153,12 @@ def store_to_db():
 
 
 ### MAIN ###
+
+links = getPrefabs()
 download_builds()
 store_to_db()
+
+# DEV ONLY (REMOVE WHEN DONE TESTING)
+# cursor.execute("delete from parts where 1=1")
+# cursor.execute("delete from prefabs where 1=1")
+print('done')

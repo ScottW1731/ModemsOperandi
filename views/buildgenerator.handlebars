@@ -8,15 +8,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
             <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Home
+                    <a class="nav-link" href="/generatebuild">Builds
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/generatebuild">Builds</a>
-                </li>
-                <li class="nav-item">
+                <li class="nav-item disabled">
                     <a class="nav-link" href="#">About Us</a>
                 </li>
             </ul>
@@ -39,22 +39,34 @@
 
 <!-- Jumbotron -->
 <div class="card card-image" style="background-image: url({{main_image}}); background-size: cover; height: 100vh;">
-    <div class="text-white text-center rgba-stylish-strong py-5 px-4 d-inline d-flex align-items-center" style="height: 100vh;">
-        <div class="py-5 align-middle">
+    <div class="rgba-stylish-strong py-5 px-4 d-flex align-items-center justify-content-center" style="height: 100vh;">
+        <div class="container mt-5 z-depth-2 pt-3 pb-1 rgba-black-strong rounded">
+            <p class="h4"></p>
+            <div class="card m-5 grey lighten-4">
+                <div class="card-body">
+                    <form action="/staticbuild" method="get" id="genBuild">
+                        <p class="h4 text-center py-4">How much would you like to spend?</p>
 
-            <!-- Content -->
-            <h5 class="h1 orange-text mb-5 mt-5"></i>Build-A-PC</h5>
-            <h2 class="card-title h2 my-4 py-2 mb-5 mt-5">We're here to help you find the right computer.</h2>
-            <p class="mb-4 pb-2 px-md-5 mx-md-5 mb-5 mt-5">We know that building your own PC can be a scary thought.
-                We're
-                here to help you along the way. Our curated list of PC builds is sure to help anyone feel at ease
-                in the part selection process. You can also use our easy to follow build guides to overcome your
-                fears of putting together your parts. We also know that building a pc is not for everyone. That is
-                why we also have a list of trusted retailers that you can use to get your own pre-built system.</p>
-            <p class="h4 mb-4 pb-2 px-md-5 mx-md-5 mb-5 mt-5">Our mission is to help everyone find the perfect PC.</p>
-            <a class="btn peach-gradient mb-5 mt-5"><i class="fas fa-clone left"></i>Get
-                Started</a>
+                        <select class="browser-default custom-select" name="genBuild">
+                            <option selected>Select you budget</option>
+                            <option value="5">$500.00</option>
+                            <option value="6">$600.00</option>
+                            <option value="7">$700.00</option>
+                            <option value="8">$800.00</option>
+                            <option value="9">$900.00</option>
+                            <option value="10">$1000.00</option>
+                            <option value="1">$1300.00</option>
+                            <option value="2">$1500.00</option>
+                            <option value="3">$1700.00</option>
+                            <option value="4">THE SKY!</option>
+                        </select>
 
+                        <div class="text-center py-4 mt-3">
+                            <button class="btn peach-gradient text-dark btn-block" type="submit">Get Build!</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

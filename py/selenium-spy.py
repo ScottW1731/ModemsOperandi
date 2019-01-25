@@ -198,10 +198,12 @@ def store_to_db():
         cursor.execute(
             "INSERT INTO parts (name, cost, categoryId, img_url) VALUES (%s, %s, %s, %s)", (name, cost, category_id, url))
 
+    # prune parts table:
+    cursor.execute("delete t1 from parts t1 inner join parts t2 where t1.id > t2.id and t1.name = t2.name")
+    
     con.commit()
     con.close()
-
-
+    
 ### MAIN ###
 
 links = getPrefabs()

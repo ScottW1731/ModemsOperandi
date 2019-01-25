@@ -158,7 +158,4 @@ links = getPrefabs()
 download_builds()
 store_to_db()
 
-# DEV ONLY (REMOVE WHEN DONE TESTING)
-# cursor.execute("delete from parts where 1=1")
-# cursor.execute("delete from prefabs where 1=1")
 print('done')

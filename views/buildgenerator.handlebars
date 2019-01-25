@@ -39,27 +39,34 @@
 
 <!-- Jumbotron -->
 <div class="card card-image" style="background-image: url({{main_image}}); background-size: cover; height: 100vh;">
-    <div class="text-white rgba-stylish-strong py-5 px-4 d-flex align-items-center justify-content-center"
-        style="height: 100vh;">
+    <div class="rgba-stylish-strong py-5 px-4 d-flex align-items-center justify-content-center" style="height: 100vh;">
         <div class="container mt-5 z-depth-2 pt-3 pb-1 rgba-black-strong rounded">
-            <table class="table table-striped table-borderless blue-grey lighten-5 text-dark rounded">
-                <thead>
-                    <tr>
-                        <th scope="col">Part Type</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Cost(USD)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each pcBuild}}
-                    <tr>
-                        <th scope="row">{{Component}}</th>
-                        <td>{{Selection}}</td>
-                        <td>{{Price}}</td>
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
+            <p class="h4"></p>
+            <div class="card m-5 grey lighten-4">
+                <div class="card-body">
+                    <form action="/staticbuild" method="get" id="genBuild">
+                        <p class="h4 text-center py-4">How much would you like to spend?</p>
+
+                        <select class="browser-default custom-select" name="genBuild">
+                            <option selected>Select you budget</option>
+                            <option value="5">$500.00</option>
+                            <option value="6">$600.00</option>
+                            <option value="7">$700.00</option>
+                            <option value="8">$800.00</option>
+                            <option value="9">$900.00</option>
+                            <option value="10">$1000.00</option>
+                            <option value="1">$1300.00</option>
+                            <option value="2">$1500.00</option>
+                            <option value="3">$1700.00</option>
+                            <option value="4">THE SKY!</option>
+                        </select>
+
+                        <div class="text-center py-4 mt-3">
+                            <button class="btn peach-gradient text-dark btn-block" type="submit">Get Build!</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

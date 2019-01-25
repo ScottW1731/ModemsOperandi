@@ -125,7 +125,7 @@ def store_to_db():
 
     # connect to MySQL
     con = pymysql.connect(host='localhost', user='root',
-                          passwd='birman', db='pc_builder')
+                          passwd='root', db='pc_builder')
     cursor = con.cursor()
 
     # parse json data to SQL insert

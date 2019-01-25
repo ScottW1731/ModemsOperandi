@@ -55,10 +55,10 @@ def extract(permalink):
     if ("/b/" in permalink):
         stub = findStub(permalink)
         embeddedUrl = base+stub
-        print("found embedded url: " + embeddedUrl)
+        # print("found embedded url: " + embeddedUrl)
         driver.get(embeddedUrl)
     else:
-        print("found list url: " + permalink)
+        # print("found list url: " + permalink)
         driver.get(permalink)
 
     # After open:
@@ -68,13 +68,39 @@ def extract(permalink):
     soup = BeautifulSoup(driver.page_source, 'lxml')
     # soup = BeautifulSoup(driver.page_source, features="html.parser")
 
-    table = soup.find_all('table')[0]
+    table = soup.find('table', {'class', 'manual-zebra'})
+    div = soup.find('div', {'class', 'details'})
+
+    img_urls = [x['src'] for x in div.find_all('img', {'class', ''})]
+    print(img_urls)
+    print(len(img_urls))
 
     # Giving the HTML table to pandas to put in a dataframe object
-    df = pd.read_html(str(table), header=0)
+    df = pd.read_html(str(table), header=0)[0]  # only one here
+    num_cols = len(df.columns)
+    print('num cols: ', num_cols)
+
+    # remove rows like rebates and shipping whose 'Selection' column will be NaN:
+    df = df[pd.notnull(df['Selection'])]
+
+    # add new empty column for image urls:
+    df.insert(num_cols, "image_url", '')
+
+    # print(df)
+
+    # inject our new images into their proper rows (by index):
+    i = 0
+    for index, row in df.iterrows():
+        print('index: ', index)
+        df.at[index, 'image_url'] = img_urls[i]
+        i += 1
+
+    # df["Base"][0] = "I'm the prettiest unicorn!"
+    print(df)
 
     # Store the dataframe in a list
-    datalist.append(df[0])
+    datalist.append(df)
+    # print(datalist)
 
 
 print("setting up driver...")
@@ -109,7 +135,7 @@ def download_builds():
 # do validation and checks before insert:
 def validate_string(val):
     if val != None:
-        if type(val) is int:            
+        if type(val) is int:
             return str(val).encode('utf-8')
         else:
             return val

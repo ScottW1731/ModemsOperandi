@@ -130,10 +130,9 @@ def store_to_db():
 
     # parse json data to SQL insert
     for i, item in enumerate(json_obj):
-        # print(item)
+
         name = validate_string(item.get("Selection", None))
         cost = validate_string(item.get("Price", None))
-        category = validate_string(item.get("Component", None))
 
         if name == None or cost == None:
             continue
@@ -142,12 +141,7 @@ def store_to_db():
             cost = validate_string(item.get("Base", None))
         # todo: IFF no price can be found at all, click the link and extract price(s)
         print(name)
-        print(category)
         cost = cost.replace("$", "")
-
-        # select * from categories
-        # categories.map(category=> category.name === category') #get that one's id
-
         cursor.execute(
             "INSERT INTO parts (name, cost) VALUES (%s, %s)", (name, cost))
 

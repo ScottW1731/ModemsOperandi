@@ -1,7 +1,7 @@
 /*
 *   SEED DATA
 */
-insert into customers (id, name, email, password) values (1138, "mike", "michael.n.preston@gmail.com", "iamroot");
+insert into customers (id, name, email) values (1138, "mike", "michael.n.preston@gmail.com");
 
 /* Builds */
 insert into builds (id, customerId, category, name) values (12345, 1138, "Gaming", "super-special-awesum build");

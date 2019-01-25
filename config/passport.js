@@ -1,100 +1,49 @@
-var bCrypt = require('bcrypt-nodejs');
+var passport = require("passport");
+var LocalStrategy = require("passport-local").Strategy;
 
-module.exports = function(passport, user) {
-  
-  var User = user;
+var db = require("../models");
 
-  var localStrategy = require('passport-local').Strategy;
-  
-  passport.serializeUser(function(user, done) {
-    done(null, user.id);
-  });
-
-  passport.deserializeUser(function(id, done) {
-    User.findById(id).then(function(user) {
-      if (user) {
-        done(null, user.get());
-      } else {
-        done(users.erros, null);
-      }
-    });
-  });
-
-  passport.use("local-signup", new localStrategy({
-    usernameField: "email",
-    passwordField: "password",
-    passReqToCallback: true
-  }, function(req, email, password, done) {
-      var generateHash = function(password) {
-        return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
-      };
-      
-      User.findOne({
-        where: {
-          email: email
-        }
-      }).then(function(user) {
-        if (user) {
-          return done(null, false, { message: "That email is already taken"});
-        } else if (req.body.password !== req.body.passwordConfirm) {
-          console.log("passwords do not match");
-          return done(null, false, { message: "Passwords do not match"});
-        } else {
-          // console.log("testing one two three: " + req.body.passwordConfirm);
-          var userPassword = generateHash(password);
-          var data = {
-            name: req.body.userName,
-            email: email,
-            password: userPassword,
-          };
-          User.create(data).then(function(newUser, created) {
-            if (!newUser) {
-              return done(null, false);
-            }
-            if (newUser) {
-              return done(null, newUser);
-            }
-          });
-        }
-      });
-  }));
-
-  passport.use("local-signin", new localStrategy({
-    usernameField: "email",
-    password: "password",
-    passReqToCallback: true
-  }, function(req, email, password, done) {
-    var User = user;
-
-    var isValidPassword = function(userpass, password) {
-      return bCrypt.compareSync(password, userpass);
-    }
-
-    User.findOne({
+// Telling passport we want to use a Local Strategy. In other words, we want login with a username/email and password
+passport.use(new LocalStrategy(
+  // Our user will sign in using an email, rather than a "username"
+  {
+    usernameField: "email"
+  },
+  function(email, password, done) {
+    // When a user tries to sign in this code runs
+    db.Customer.findOne({
       where: {
         email: email
       }
-    }).then(function(user) {
-      if (!user) {
+    }).then(function(dbCustomer) {
+      // If there's no user with the given email
+      if (!dbCustomer) {
         return done(null, false, {
-          message: "Email does not exist"
+          message: "Incorrect email."
         });
       }
-
-      if (!isValidPassword(user.password, password)) {
+      // If there is a user with the given email, but the password the user gives us is incorrect
+      else if (!dbCustomer.validPassword(password)) {
         return done(null, false, {
-          message: "Incorrect Password."
+          message: "Incorrect password."
         });
       }
-
-      var userInfo = user.get();
-      return done(null, userInfo);
-    }).catch(function(err) {
-      console.log("Error:", err);
-
-      return done(null, false, {
-        message: "Something went wrong with your signin"
-      });
+      // If none of the above, return the user
+      return done(null, dbCustomer);
     });
-  }));
-};
+  }
+));
+
+// In order to help keep authentication state across HTTP requests,
+// Sequelize needs to serialize and deserialize the user
+// Just consider this part boilerplate needed to make it all work
+passport.serializeUser(function(customer, cb) {
+  cb(null, customer);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
+
+// Exporting our configured passport
+module.exports = passport;

@@ -1,61 +1,51 @@
-<div class="row d-flex justify-content-center">
-    <!--Navbar -->
-    <nav class="mb-1 navbar navbar-expand-lg navbar-dark rgba-black-strong mt-3 col-md-9 fixed-top ml-auto mr-auto rounded">
-        <a class="navbar-brand" href="/">Build-A-PC</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
-            aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/staticbuild">Builds</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About Us</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto nav-flex-icons">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                        <a class="dropdown-item" href="{{link1}}">{{text1}}</a>
-                        <a class="dropdown-item" href="{{link2}}">{{text2}}</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <!--/.Navbar -->
-</div>
-
 <!-- Jumbotron -->
 <div class="card card-image" style="background-image: url({{main_image}}); background-size: cover; height: 100vh;">
     <div class="text-white text-center rgba-stylish-strong py-5 px-4 d-inline d-flex align-items-center" style="height: 100vh;">
         <div class="py-5 align-middle">
 
             <!-- Content -->
-            <h5 class="h1 orange-text mb-5 mt-5"></i>Build-A-PC</h5>
+            <h5 class="h5 orange-text mb-5 mt-5"></i>Build-A-PC</h5>
             <h2 class="card-title h2 my-4 py-2 mb-5 mt-5">We're here to help you find the right computer.</h2>
             <p class="mb-4 pb-2 px-md-5 mx-md-5 mb-5 mt-5">We know that building your own PC can be a scary thought.
                 We're
                 here to help you along the way. Our curated list of PC builds is sure to help anyone feel at ease
                 in the part selection process. You can also use our easy to follow build guides to overcome your
                 fears of putting together your parts. We also know that building a pc is not for everyone. That is
-                why we also have a list of trusted retailers that you can use to get your own pre-built system.</p>
-            <p class="h4 mb-4 pb-2 px-md-5 mx-md-5 mb-5 mt-5">Our mission is to help everyone find the perfect PC.</p>
-            <a class="btn peach-gradient mb-5 mt-5"><i class="fas fa-clone left"></i>Get
-                Started</a>
+                why we also have a list of trusted retailers that you can use to get your own pre-built system. Our
+                mission is to help everyone find the perfect PC.</p>
+            <a class="btn peach-gradient mb-5 mt-5"><i class="fas fa-clone left"></i>Signup</a>
 
         </div>
     </div>
 </div>
 <!-- Jumbotron -->
+
+<div class="mt-5 text-center">
+    <h1 class="mb-3">Featured Builds</h1>
+    <div class="row">
+        
+        <div class="col-md-1"></div>
+        <div class="view col-md-3">
+            <img src="{{image_url}}" class="img-fluid" alt="placeholder">
+            <div class="mask flex-center waves-effect waves-light rgba-stylish-light">
+                <p class="white-text">strong overlay</p>
+            </div>
+        </div>
+
+        <div class="col-md-1"></div>
+        <div class="view col-md-3">
+            <img src="{{image_url}}" class="img-fluid" alt="placeholder">
+            <div class="mask flex-center waves-effect waves-light rgba-stylish-light">
+                <p class="white-text">strong overlay</p>
+            </div>
+        </div>
+
+        <div class="col-md-1"></div>
+        <div class="view col-md-3">
+            <img src="{{image_url}}" class="img-fluid" alt="placeholder">
+            <div class="mask flex-center waves-effect waves-light rgba-stylish-light">
+                <p class="white-text">strong overlay</p>
+            </div>
+        </div>
+    </div>
+</div>

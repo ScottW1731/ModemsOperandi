@@ -1,0 +1,73 @@
+<div class="row d-flex justify-content-center">
+    <!--Navbar -->
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark rgba-black-strong mt-3 col-md-9 fixed-top ml-auto mr-auto rounded">
+        <a class="navbar-brand" href="/">Build-A-PC</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+            aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/generatebuild">Builds
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item disabled">
+                    <a class="nav-link" href="#">About Us</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
+                        <a class="dropdown-item" href="{{link1}}">{{text1}}</a>
+                        <a class="dropdown-item" href="{{link2}}">{{text2}}</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--/.Navbar -->
+</div>
+
+<!-- Jumbotron -->
+<div class="card card-image" style="background-image: url({{main_image}}); background-size: cover; height: 100vh;">
+    <div class="rgba-stylish-strong py-5 px-4 d-flex align-items-center justify-content-center" style="height: 100vh;">
+        <div class="container mt-5 z-depth-2 pt-3 pb-1 rgba-black-strong rounded">
+            <p class="h4"></p>
+            <div class="card m-5 grey lighten-4">
+                <div class="card-body">
+                    <form action="/staticbuild" method="get" id="genBuild">
+                        <p class="h4 text-center py-4">How much would you like to spend?</p>
+
+                        <select class="browser-default custom-select" name="genBuild">
+                            <option selected>Select you budget</option>
+                            <option value="5">$500.00</option>
+                            <option value="6">$600.00</option>
+                            <option value="7">$700.00</option>
+                            <option value="8">$800.00</option>
+                            <option value="9">$900.00</option>
+                            <option value="10">$1000.00</option>
+                            <option value="1">$1300.00</option>
+                            <option value="2">$1500.00</option>
+                            <option value="3">$1700.00</option>
+                            <option value="4">THE SKY!</option>
+                        </select>
+
+                        <div class="text-center py-4 mt-3">
+                            <button class="btn peach-gradient text-dark btn-block" type="submit">Get Build!</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Jumbotron -->

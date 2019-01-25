@@ -12,14 +12,31 @@ import os
 import requests
 import pymysql
 import json
+import sys
 #from tabulate import tabulate
 
 base = "https://pcpartpicker.com"
 # connect to MySQL
-con = pymysql.connect(host='localhost', user='root',
-                      passwd='root', db='pc_builder')
-cursor = con.cursor()
 
+
+def config(environment):
+    dev = pymysql.connect(host='localhost', user='root',
+                               passwd='root', db='pc_builder')
+    if environment == "development":
+        return dev
+    elif environment == "production":
+        return pymysql.connect(host='zf4nk2bcqjvif4in.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', user='cari5p5cpv6qwnow',
+                               passwd='oa0muxbzyrtf52ct', db='cenr5m2pi0eeo591')
+    else:
+        return dev
+
+
+for x in sys.argv:
+     print ("Argument: ", x)
+
+# print(sys.argv[0])
+con = config(sys.argv[1])
+cursor = con.cursor()
 
 def getCategoryLookup():
     cursor.execute("select name, id from categories")
@@ -156,6 +173,8 @@ def validate_string(val):
             return val
 
 # read JSON file & store to mysql db:
+
+
 def store_to_db():
     path = os.getcwd()
     savePath = path+"\\" + saveFileName
@@ -188,7 +207,6 @@ def store_to_db():
         if cost != None:
             cost = cost.replace("$", "")
 
-
         if category_name != None:
             category_id = categories[category_name]
 
@@ -199,12 +217,14 @@ def store_to_db():
             "INSERT INTO parts (name, cost, categoryId, img_url) VALUES (%s, %s, %s, %s)", (name, cost, category_id, url))
 
     # prune parts table:
-    cursor.execute("delete t1 from parts t1 inner join parts t2 where t1.id > t2.id and t1.name = t2.name")
-    
+    cursor.execute(
+        "delete t1 from parts t1 inner join parts t2 where t1.id > t2.id and t1.name = t2.name")
+
     con.commit()
     con.close()
-    
+
 ### MAIN ###
+
 
 links = getPrefabs()
 download_builds()

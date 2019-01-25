@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    var Build = sequelize.define("Build", {
+    var Build = sequelize.define("build", {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -19,10 +19,10 @@ module.exports = function (sequelize, DataTypes) {
         timestamps: false
     });
 
-    Build.associate = function (models) {
-        Build.belongsTo(models.Customer, {
-            onDelete: "cascade"
-        });
-    };
+    // Build.associate = function (models) {
+    //     Build.belongsTo(models.Customer, {
+    //         onDelete: "cascade"
+    //     });
+    // };
     return Build;
 };

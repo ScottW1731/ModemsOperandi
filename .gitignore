@@ -5,3 +5,4 @@ npm-debug.log
 test.sql
 geckodriver.log
 build_data.json
+py/build_data.json

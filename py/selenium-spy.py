@@ -16,10 +16,17 @@ import sys
 #from tabulate import tabulate
 
 base = "https://pcpartpicker.com"
-# connect to MySQL
+environment = None
 
 
-def config(environment):
+if(len(sys.argv) > 1):
+    environment = sys.argv[1]
+# print("env: ", environment)
+environment = environment or "production"
+# print("env after: ", environment)
+
+
+def config():
     dev = pymysql.connect(host='localhost', user='root',
                                passwd='root', db='pc_builder')
     if environment == "development":
@@ -30,12 +37,8 @@ def config(environment):
     else:
         return dev
 
-
-for x in sys.argv:
-     print ("Argument: ", x)
-
-# print(sys.argv[0])
-con = config(sys.argv[1])
+# connect to MySQL
+con = config()
 cursor = con.cursor()
 
 def getCategoryLookup():
@@ -77,7 +80,7 @@ def getSoup(url):
     return BeautifulSoup(plain_text, features="html.parser")
 
 
-def extract(permalink):
+def extract(permalink, driver):
 
     if ("/b/" in permalink):
         stub = findStub(permalink)
@@ -129,24 +132,24 @@ def extract(permalink):
     datalist.append(df)
     # print(datalist)
 
-
-print("setting up driver...")
-driver = webdriver.Firefox()
-print("waiting...")
-driver.implicitly_wait(30)
-
 datalist = []  # empty list
 saveFileName = "build_data.json"
 
 
 def download_builds():
 
+    print("setting up driver...")
+
+    driver = webdriver.Firefox()
+    print("waiting...")
+    driver.implicitly_wait(30)
+
     # TODO: have this function accept raw JSON data to consume!
     if(len(links) == 0):
         return
 
     for permalink in links:
-        extract(permalink)
+        extract(permalink, driver)
 
     driver.quit()
     # combine all pandas dataframes in the list into one big dataframe
@@ -173,8 +176,6 @@ def validate_string(val):
             return val
 
 # read JSON file & store to mysql db:
-
-
 def store_to_db():
     path = os.getcwd()
     savePath = path+"\\" + saveFileName
@@ -184,7 +185,7 @@ def store_to_db():
 
     skip_pattern = re.compile('^.*From parametric.*')
     categories = getCategoryLookup()
-
+    
     # parse json data to SQL insert
     for i, item in enumerate(json_obj):
 
@@ -224,10 +225,10 @@ def store_to_db():
     con.close()
 
 ### MAIN ###
+if environment == "development":  # TODO: remove this line when the demo on 1/25/2019 is over
+    links = getPrefabs()
+    download_builds()
 
-
-links = getPrefabs()
-download_builds()
 store_to_db()
 
 print('done')

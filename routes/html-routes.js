@@ -98,7 +98,7 @@ module.exports = function(app, passport) {
 
   app.get("/build", function(req, res) {
     // var tbuild = db.pcBuild
-    db.StaticBuild.findAll({
+    db.staticbuild.findAll({
       where: {
         id: 1
       }
@@ -111,7 +111,7 @@ module.exports = function(app, passport) {
   app.get("/staticbuild", function(req, res) {
     var buildID = req.query['genBuild'];
     console.log(buildID);
-    db.StaticBuild.findAll({
+    db.staticbuild.findAll({
       where: {
         id: buildID
       }

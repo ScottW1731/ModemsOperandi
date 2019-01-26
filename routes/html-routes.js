@@ -108,6 +108,10 @@ module.exports = function(app, passport) {
     });
   });
 
+  app.get("/apiroutes", function(req, res) {
+    res.render("apiroutes");
+  })
+
   app.get("/staticbuild", function(req, res) {
     var buildID = req.query['genBuild'];
     console.log(buildID);

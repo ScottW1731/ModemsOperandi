@@ -32,6 +32,12 @@ module.exports = function (app) {
         })
     });
 
+    app.get("/api/builds/complete", function (req, res) {
+        db.staticbuild.findAll({}).then(function (staticbuild) {
+            res.json(staticbuild);
+        })
+    });
+
     // Get all builds of category type -- Byron
     app.get("/api/builds/:category", function (req, res) {
         db.build.findAll({

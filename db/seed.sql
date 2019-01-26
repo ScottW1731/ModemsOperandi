@@ -9,8 +9,8 @@ delete from prefabs where 1=1;
 /*
 *   SEED DATA
 */
-insert into customers (id, name, email) values 
-    (1138, "mike", "michael.n.preston@gmail.com");
+insert into customers (id, name, email, password) values 
+    (1138, "mike", "michael.n.preston@gmail.com", 'root');
 
 /* Builds */
 insert into builds (id, customerId, category, name) values 
@@ -24,7 +24,7 @@ insert into builds (customerId, category, name) values
 	(42, "Gaming", "'IT'");
 
 /* Parts */
--- insert into parts (name, cost) values 
+-- insert into parts (name, cost) values
 --     ("Intel Core i3-8100", 118.99),
 --     ("Gigabyte B360M DSH3H", 74.99),
 --     ("MSI Radeon RX 580 GB Armor", 209.99),

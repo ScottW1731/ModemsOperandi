@@ -225,7 +225,7 @@ def store_to_db():
     con.close()
 
 ### MAIN ###
-if environment == "development":  # TODO: remove this line when the demo on 1/25/2019 is over
+if environment == "development":  # TODO: remove this line when the demo on 1/26/2019 is over
     links = getPrefabs()
     download_builds()
 

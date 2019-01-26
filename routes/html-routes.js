@@ -103,10 +103,14 @@ module.exports = function(app, passport) {
         id: 1
       }
     }).then(function(build) {
-      console.log(build[0].dataValues);
+      console.log(datval);
       res.json(build);
     });
   });
+
+  app.get("/apiroutes", function(req, res) {
+    res.render("apiroutes");
+  })
 
   app.get("/staticbuild", function(req, res) {
     var buildID = req.query['genBuild'];
@@ -116,47 +120,49 @@ module.exports = function(app, passport) {
         id: buildID
       }
     }).then(function(build) {
+      let datval = build[0].dataValues;
+      // mike had mentioned to me that maybe this could be made into something simpler
       var reqPath = req.protocol + "://" + req.get("host");
       var pcBuild = [
         {
           Component: "CPU",
-          Selection: build[0].dataValues.cpu,
-          Price: build[0].dataValues.cpuprice
+          Selection: datval.cpu,
+          Price: datval.cpuprice
         },
         {
           Component: "Motherboard",
-          Selection: build[0].dataValues.motherboard,
-          Price: build[0].dataValues.motherboardprice
+          Selection: datval.motherboard,
+          Price: datval.motherboardprice
         },
         {
           Component: "Memory",
-          Selection: build[0].dataValues.memory,
-          Price: build[0].dataValues.memoryprice
+          Selection: datval.memory,
+          Price: datval.memoryprice
         },
         {
           Component: "Storage",
-          Selection: build[0].dataValues.storage,
-          Price: build[0].dataValues.storageprice
+          Selection: datval.storage,
+          Price: datval.storageprice
         },
         {
           Component: "Video Card",
-          Selection: build[0].dataValues.gpu,
-          Price: build[0].dataValues.gpuprice
+          Selection: datval.gpu,
+          Price: datval.gpuprice
         },
         {
           Component: "Case",
-          Selection: build[0].dataValues.cse,
-          Price: build[0].dataValues.cseprice
+          Selection: datval.cse,
+          Price: datval.cseprice
         },
         {
           Component: "Power Supply",
-          Selection: build[0].dataValues.powersupply,
-          Price: build[0].dataValues.powersupplyprice
+          Selection: datval.powersupply,
+          Price: datval.powersupplyprice
         },
         {
           Component: "Base Total:",
           Selection: null,
-          Price: build[0].dataValues.price
+          Price: datval.price
         }
       ];
       if (req.isAuthenticated) {

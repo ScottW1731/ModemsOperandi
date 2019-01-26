@@ -1,4 +1,4 @@
-USE pc_builder;
+#USE pc_builder;
 
 drop table if EXISTS staticbuilds;
 

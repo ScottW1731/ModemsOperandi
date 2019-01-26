@@ -4,7 +4,7 @@
 // Creating our Customer model
 module.exports = function(sequelize, DataTypes) {
   var Customer = sequelize.define(
-    "Customer",
+    "customer",
     {
       id: {
         primaryKey: true,
@@ -49,11 +49,11 @@ module.exports = function(sequelize, DataTypes) {
   // };
   // Hooks are automatic methods that run during various phases of the Customer Model lifecycle
   // In this case, before a Customer is created, we will automatically hash their password
-  Customer.associate = function(models) {
-    Customer.hasMany(models.Build, {
-      onDelete: "cascade"
-    });
-  };
+//   Customer.associate = function(models) {
+//     Customer.hasMany(models.Build, {
+//       onDelete: "cascade"
+//     });
+//   };
   //  Associating Customer to many builds
   return Customer;
 };

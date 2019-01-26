@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    var StaticBuild = sequelize.define("StaticBuild", {
+    var StaticBuild = sequelize.define("staticbuild", {
         name: {
             type: DataTypes.STRING,
             allowNull: false,

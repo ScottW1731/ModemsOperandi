@@ -75,6 +75,27 @@ module.exports = function(app, passport) {
     });
   });
 
+  app.get("/generatebuild", function(req, res) {
+    var reqPath = req.protocol + "://" + req.get("host");
+    if (req.isAuthenticated()) {
+      res.render("buildgenerator", {
+        link1: reqPath + "/profile",
+        text1: "Profile",
+        link2: reqPath + "/logout",
+        text2: "Logout",
+        main_image: reqPath + "/images/rafael-pol-474017-unsplash.jpg"
+      });
+    } else {
+      res.render("buildgenerator", {
+        link1: reqPath + "/login",
+        text1: "Login",
+        link2: reqPath + "/signup",
+        text2: "Signup",
+        main_image: reqPath + "/images/rafael-pol-474017-unsplash.jpg"
+      });
+    }
+  });
+
   app.get("/build", function(req, res) {
     // var tbuild = db.pcBuild
     db.StaticBuild.findAll({
@@ -88,9 +109,11 @@ module.exports = function(app, passport) {
   });
 
   app.get("/staticbuild", function(req, res) {
+    var buildID = req.query['genBuild'];
+    console.log(buildID);
     db.StaticBuild.findAll({
       where: {
-        id: 4
+        id: buildID
       }
     }).then(function(build) {
       let datval = build[0].dataValues;

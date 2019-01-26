@@ -20,7 +20,7 @@ create table parts
 	id int not null AUTO_INCREMENT,
 	#name varchar(255),
 	name text,
-	cost double(12, 2),	
+	cost double(12, 2) default null,	
     categoryId int,
     img_url varchar(250) null,
 	primary key (id)
@@ -32,6 +32,7 @@ create table prefabs
     id int not null AUTO_INCREMENT,
     name varchar(150),
     permalink varchar(350),
+    visited bool not null default false,
     primary key (id)
 );
 
@@ -57,6 +58,5 @@ create table customers(
 	id int not null auto_increment,
 	name varchar(150),
     email varchar(150),
-    password text not null,
 	primary key (id)
 );

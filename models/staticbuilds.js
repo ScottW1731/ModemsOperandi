@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    var StaticBuild = sequelize.define("staticbuild", {
+    var staticbuild = sequelize.define("staticbuild", {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -81,5 +81,5 @@ module.exports = function (sequelize, DataTypes) {
     });
 
     
-    return StaticBuild;
+    return staticbuild;
 };

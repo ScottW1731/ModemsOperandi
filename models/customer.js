@@ -3,7 +3,7 @@
 // var bcrypt = require("bcrypt-nodejs");
 // Creating our Customer model
 module.exports = function(sequelize, DataTypes) {
-  var Customer = sequelize.define(
+  var customer = sequelize.define(
     "customer",
     {
       id: {
@@ -55,5 +55,5 @@ module.exports = function(sequelize, DataTypes) {
 //     });
 //   };
   //  Associating Customer to many builds
-  return Customer;
+  return customer;
 };

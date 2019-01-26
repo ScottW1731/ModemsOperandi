@@ -75,6 +75,14 @@ module.exports = function(app, passport) {
     });
   });
 
+  app.get("/buildcreate", function(req, res) {
+    // var reqPath = req.protocol + "://" + req.get("host");
+    res.render("buildcreate", {
+      // signup: reqPath + "/signup",
+      // home: reqPath + "/"
+    });
+  });
+
   app.get("/generatebuild", function(req, res) {
     var reqPath = req.protocol + "://" + req.get("host");
     if (req.isAuthenticated()) {
@@ -103,7 +111,7 @@ module.exports = function(app, passport) {
         id: 1
       }
     }).then(function(build) {
-      console.log(datval);
+      console.log(build[0].dataValues);
       res.json(build);
     });
   });
@@ -116,49 +124,48 @@ module.exports = function(app, passport) {
         id: buildID
       }
     }).then(function(build) {
-      let datval = build[0].dataValues;
       // mike had mentioned to me that maybe this could be made into something simpler
       var reqPath = req.protocol + "://" + req.get("host");
       var pcBuild = [
         {
           Component: "CPU",
-          Selection: datval.cpu,
-          Price: datval.cpuprice
+          Selection: build[0].dataValues.cpu,
+          Price: build[0].dataValues.cpuprice
         },
         {
           Component: "Motherboard",
-          Selection: datval.motherboard,
-          Price: datval.motherboardprice
+          Selection: build[0].dataValues.motherboard,
+          Price: build[0].dataValues.motherboardprice
         },
         {
           Component: "Memory",
-          Selection: datval.memory,
-          Price: datval.memoryprice
+          Selection: build[0].dataValues.memory,
+          Price: build[0].dataValues.memoryprice
         },
         {
           Component: "Storage",
-          Selection: datval.storage,
-          Price: datval.storageprice
+          Selection: build[0].dataValues.storage,
+          Price: build[0].dataValues.storageprice
         },
         {
           Component: "Video Card",
-          Selection: datval.gpu,
-          Price: datval.gpuprice
+          Selection: build[0].dataValues.gpu,
+          Price: build[0].dataValues.gpuprice
         },
         {
           Component: "Case",
-          Selection: datval.cse,
-          Price: datval.cseprice
+          Selection: build[0].dataValues.cse,
+          Price: build[0].dataValues.cseprice
         },
         {
           Component: "Power Supply",
-          Selection: datval.powersupply,
-          Price: datval.powersupplyprice
+          Selection: build[0].dataValues.powersupply,
+          Price: build[0].dataValues.powersupplyprice
         },
         {
           Component: "Base Total:",
           Selection: null,
-          Price: datval.price
+          Price: build[0].dataValues.price
         }
       ];
       if (req.isAuthenticated) {

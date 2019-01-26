@@ -54,28 +54,28 @@
                     <tr>
                         <th scope="row">{{Component}}</th>
                         <td>{{Selection}}</td>
+                        <div class="mdc-select">
+                            <i class="mdc-select__dropdown-icon"></i>
+                            <select class="mdc-select__native-control">
+                                <option value="" disabled="" selected=""></option>
+                                <option value="part1">
+                                    part1
+                                </option>
+                                <option value="part2">
+                                    part2
+                                </option>
+                                <option value="part3">
+                                    part3
+                                </option>
+                            </select>
+                            <label class="mdc-floating-label">Pick a Food Group</label>
+                            <div class="mdc-line-ripple"></div>
+                        </div>
                         <td>{{Price}}</td>
                     </tr>
                     {{/each}}
                 </tbody>
             </table>
-            <div class="mdc-select">
-                <i class="mdc-select__dropdown-icon"></i>
-                <select class="mdc-select__native-control">
-                    <option value="" disabled="" selected=""></option>
-                    <option value="part1">
-                        part1
-                    </option>
-                    <option value="part2">
-                        part2
-                    </option>
-                    <option value="part3">
-                        part3
-                    </option>
-                </select>
-                <label class="mdc-floating-label">Pick a Food Group</label>
-                <div class="mdc-line-ripple"></div>
-            </div>
         </div>
     </div>
 </div>

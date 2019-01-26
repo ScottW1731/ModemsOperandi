@@ -49,7 +49,7 @@ app.use(express.static("public"));
 
 // Routes
 // =============================================================
-require("./config/passport.js")(passport, db.Customer);
+require("./config/passport.js")(passport, db.customer);
 require("./routes/api-routes.js")(app);
 require("./routes/html-routes.js")(app, passport);
 

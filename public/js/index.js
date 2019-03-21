@@ -36,7 +36,7 @@ $(document).on("click", "#submit-pc", function (event) {
     inputs.length = 0;
     div.empty();
 
-    //Get all inputs, print and upsert: 
+    //Get all inputs, print and upsert:
     $('input').each(function () {
 
         var item = {
@@ -46,12 +46,12 @@ $(document).on("click", "#submit-pc", function (event) {
 
         inputs.push(item);
 
-        //todo: make this a bulk operation on the array of items using sequelize.bulk
         upsert(item);
         div.append(item.name + " ");
     });
 });
 
+//TODO: make this a bulk operation on the array of items using sequelize.bulk
 function upsert(data) {
     $.post("/api/builds/new", data).then(function (result) {
         console.log(result)

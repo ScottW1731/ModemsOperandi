@@ -17,13 +17,12 @@
 
 | Name | Link |
 | ----- | -----:|
-|  | b |
-| a | b |
-| a | b |
-| a | b |
-| a | b |
-| a | b |
-| a | b |
+| Handlebars | https://handlebarsjs.com/ |
+| bcrypt-nodejs | https://www.npmjs.com/package/bcrypt-nodejs |
+| Express | https://www.npmjs.com/package/express |
+| Mysql | https://www.npmjs.com/package/mysql |
+| PassportJS | https://www.npmjs.com/package/passport |
+| Sequelize | https://www.npmjs.com/package/sequelize |
 
 # Contributors:
 

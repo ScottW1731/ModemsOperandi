@@ -10,3 +10,5 @@
   - *PC Power!*  While you're building, always know how your PC stacks up!
  
 ## Usage
+
+![Selecting a Build](https://github.com/ScottW1731/ModemsOperandi/blob/master/screenshots/ModemsOperandi-BasicBuild.gif)

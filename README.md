@@ -25,7 +25,7 @@
 | a | b |
 | a | b |
 
-# Authors:
+# Contributors:
 
 > Michael Preston [**Portfolio**](http://mikepreston17.github.io/) | [**GitHub**](https://github.com/mikepreston17) | [**LinkedIn**](https://www.linkedin.com/in/michael-n-preston/)
 

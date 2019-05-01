@@ -12,3 +12,21 @@
 ## Usage
 
 ![Selecting a Build](https://github.com/ScottW1731/ModemsOperandi/blob/master/screenshots/ModemsOperandi-BasicBuild.gif)
+
+## Tech Used: 
+
+| Name | Link |
+| ----- | -----:|
+|  | b |
+| a | b |
+| a | b |
+| a | b |
+| a | b |
+| a | b |
+| a | b |
+
+# Authors:
+
+> Michael Preston [**Portfolio**](http://mikepreston17.github.io/) | [**GitHub**](https://mikepreston17.github.com) | [**LinkedIn**](https://www.linkedin.com/in/michael-n-preston/)
+
+

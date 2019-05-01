@@ -28,4 +28,10 @@
 
 > Michael Preston [**Portfolio**](http://mikepreston17.github.io/) | [**GitHub**](https://github.com/mikepreston17) | [**LinkedIn**](https://www.linkedin.com/in/michael-n-preston/)
 
+> Byron Roberts [**Portfolio**](https://byronproberts.github.io/) | [**GitHub**](https://github.com/ByronPRoberts)
+
+> Daniel Reynolds [**GitHub**](https://github.com/kirplink) | [**LinkedIn**](https://www.linkedin.com/in/daniel-s-reynolds/)
+
+> Scott Wagner [**Portfolio**](https://scottw1731.github.io/) | [**GitHub**](https://github.com/ScottW1731) | [**LinkedIn**](https://www.linkedin.com/in/scott-wagner-ab9035aa/)
+
 

@@ -21,22 +21,39 @@
 // Accessories/ Other
 // Custom parts
 /* global moment */
-  // When user builds (clicks addBtn)
-  // thank you miachel
-  // global variable div
+// When user builds (clicks addBtn)
+// thank you miachel
+// global variable div
 
-var div = $("#append-here")
-  $(document).on("click", "#submit-pc", function(event) {
-    // console.log("test")
+
+var div = $("#append-here");
+var inputs = [];
+
+$(document).on("click", "#submit-pc", function (event) {
     event.preventDefault();
-    div.append($("#cpu-input").val());
-    
-    div.append($("#mb-input").val());
-    
-    div.append($("#gpu-input").val());
-    
-    div.append($("#cooler-input").val());
-    
-    div.append($("#memory-input").val());
-    
-  });
+
+    //Clear the form:
+    inputs.length = 0;
+    div.empty();
+
+    //Get all inputs, print and upsert: 
+    $('input').each(function () {
+
+        var item = {
+            name: this.value.trim(),
+            category: "Gaming"
+        };
+
+        inputs.push(item);
+
+        //todo: make this a bulk operation on the array of items using sequelize.bulk
+        upsert(item);
+        div.append(item.name + " ");
+    });
+});
+
+function upsert(data) {
+    $.post("/api/builds/new", data).then(function (result) {
+        console.log(result)
+    })
+}
